@@ -65,7 +65,7 @@ The **EN / МН** switch sits in the top bar and on the intro screen. The choice
 Hosted on **Vercel**, connected to the GitHub repo: every push to `main` (including saves from the admin) redeploys the site. Vercel detects Vite by itself: build `npm run build`, output `dist`.
 
 Any other static host works too: `npm run build` and upload `dist/`. Asset paths are relative, so sub-folders work.
-After deploying, change `og:image` in `index.html` to the absolute URL of `og.png` for nice link previews.
+Live at **https://five-hundred-days.vercel.app**. If the address changes, update `og:image` in `index.html` (link previews need an absolute URL).
 
 On her iPhone: Safari → Share → **Add to Home Screen** opens it full-screen like an app.
 

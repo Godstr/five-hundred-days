@@ -7,3 +7,5 @@ dist
 # Local tooling and stray downloads
 .claude/
 *lyrics.jpg
+.vercel
+.env*
