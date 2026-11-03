@@ -53,8 +53,9 @@ The **EN / МН** switch sits in the top bar and on the intro screen. The choice
 
 ## Deploy
 
-`npm run build` and upload `dist/` to Vercel, Netlify, GitHub Pages or any static host. Asset paths are relative, so sub-folders work.
-After deploying, change `og:image` in `index.html` to the absolute URL of `og.png` for nice link previews.
+Every push to `main` builds the site and publishes it to **https://godstr.github.io/five-hundred-days/** (`.github/workflows/deploy.yml`). One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
+
+Elsewhere: `npm run build` and upload `dist/` to any static host. Asset paths are relative, so sub-folders work. If the address changes, update `og:image` in `index.html` (it must be an absolute URL for link previews).
 
 On her iPhone: Safari → Share → **Add to Home Screen** opens it full-screen like an app.
 
