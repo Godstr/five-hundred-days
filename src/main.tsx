@@ -17,17 +17,15 @@ const render = (Component: ComponentType) =>
     </StrictMode>,
   )
 
-// The editor at #admin only exists under `npm run dev`. In a build this branch
-// is removed, so the admin code never ships to her.
-const isAdmin = import.meta.env.DEV && window.location.hash === '#admin'
+// The editor lives at #admin, in its own chunk: visitors never download it.
+// On the published site it needs a GitHub token before it shows anything.
+const isAdmin = window.location.hash === '#admin'
 
-if (import.meta.env.DEV) {
-  window.addEventListener('hashchange', () => {
-    if ((window.location.hash === '#admin') !== isAdmin) window.location.reload()
-  })
-  // Sent by the admin plugin when the story is saved: the site refreshes, the editor stays put
-  if (!isAdmin) import.meta.hot?.on('story-changed', () => window.location.reload())
-}
+window.addEventListener('hashchange', () => {
+  if ((window.location.hash === '#admin') !== isAdmin) window.location.reload()
+})
+// Sent by the admin plugin when the story is saved: the site refreshes, the editor stays put
+if (import.meta.env.DEV && !isAdmin) import.meta.hot?.on('story-changed', () => window.location.reload())
 
 if (isAdmin) {
   void import('./admin/Admin').then(({ default: Admin }) => render(Admin))

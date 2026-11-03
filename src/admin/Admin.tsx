@@ -1,10 +1,12 @@
-import { Check, ExternalLink, LoaderCircle, Plus, Save, TriangleAlert } from 'lucide-react'
+import { Check, ExternalLink, LoaderCircle, LogOut, Plus, Save, TriangleAlert } from 'lucide-react'
 import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import type { L } from '../i18n'
 import type { StoryConfig, Track } from '../config/story'
 import { cn } from '../lib/dom'
-import { loadStory, saveStory } from './api'
+import { loadStory, saveStory, usesGitHub } from './api'
 import { BiField, inputClass, Label, MediaField } from './fields'
+import { hasToken, signOut } from './github'
+import { SignIn } from './SignIn'
 import { TrackEditor } from './TrackEditor'
 
 type Status = 'loading' | 'ready' | 'saving' | 'saved' | 'error'
@@ -27,10 +29,32 @@ function newTrack(): Track {
 }
 
 /**
- * The local editor at http://localhost:5173/#admin (dev server only).
- * Edits src/content/story.json and uploads photos / audio into public/.
+ * The editor at #admin. Under `npm run dev` it edits src/content/story.json and
+ * uploads into public/ directly; on the published site it commits them to GitHub.
  */
 export default function Admin() {
+  const [signedIn, setSignedIn] = useState(() => !usesGitHub || hasToken())
+  const [notice, setNotice] = useState('')
+  const signedOut = useCallback((message: string) => {
+    setNotice(message)
+    setSignedIn(false)
+  }, [])
+
+  useEffect(() => {
+    document.title = 'Admin · Five Hundred Days'
+  }, [])
+
+  if (!signedIn) {
+    return (
+      <Shell>
+        <SignIn notice={notice} onSignedIn={() => setSignedIn(true)} />
+      </Shell>
+    )
+  }
+  return <Editor onSignedOut={signedOut} />
+}
+
+function Editor({ onSignedOut }: { onSignedOut: (message: string) => void }) {
   const [story, setStory] = useState<StoryConfig | null>(null)
   const [savedJson, setSavedJson] = useState('')
   const [status, setStatus] = useState<Status>('loading')
@@ -38,7 +62,6 @@ export default function Admin() {
   const [openId, setOpenId] = useState<string | null>(null)
 
   useEffect(() => {
-    document.title = 'Admin · Five Hundred Days'
     loadStory()
       .then((s) => {
         setStory(s)
@@ -46,10 +69,11 @@ export default function Admin() {
         setStatus('ready')
       })
       .catch((e) => {
+        if (usesGitHub && !hasToken()) return onSignedOut(e.message)
         setError(e.message)
         setStatus('error')
       })
-  }, [])
+  }, [onSignedOut])
 
   const dirty = !!story && JSON.stringify(story) !== savedJson
 
@@ -92,7 +116,13 @@ export default function Admin() {
         <div className="grid min-h-[60vh] place-items-center text-sand">
           {status === 'error' ? (
             <p className="max-w-md text-center text-red-300">
-              Couldn’t load the story: {error}. The admin only works under <code>npm run dev</code>.
+              Couldn’t load the story: {error}
+              {!usesGitHub && (
+                <>
+                  {' '}
+                  The admin only works under <code>npm run dev</code>.
+                </>
+              )}
             </p>
           ) : (
             <LoaderCircle className="size-6 animate-spin" />
@@ -131,12 +161,14 @@ export default function Admin() {
       <header className="sticky top-0 z-20 -mx-4 mb-8 border-b border-white/8 bg-ink/85 px-4 py-3 backdrop-blur-xl md:-mx-8 md:px-8">
         <div className="flex items-center gap-3">
           <div className="min-w-0 flex-1">
-            <p className="font-mono text-[10px] tracking-[0.24em] text-amber uppercase">Admin · only on this computer</p>
+            <p className="font-mono text-[10px] tracking-[0.24em] text-amber uppercase">
+              Admin · {usesGitHub ? 'saves to GitHub' : 'only on this computer'}
+            </p>
             <h1 className="truncate font-display text-2xl italic">Five Hundred Days</h1>
           </div>
           <SaveState status={status} dirty={dirty} error={error} />
           <a
-            href="/"
+            href="./"
             target="_blank"
             rel="noreferrer"
             className="hidden items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-sm text-sand hover:text-cream sm:inline-flex"
@@ -152,6 +184,20 @@ export default function Admin() {
             {status === 'saving' ? <LoaderCircle className="size-4 animate-spin" /> : <Save className="size-4" />}
             Save
           </button>
+          {usesGitHub && (
+            <button
+              type="button"
+              aria-label="Sign out"
+              title="Sign out"
+              onClick={() => {
+                signOut()
+                onSignedOut('')
+              }}
+              className="grid size-9 place-items-center rounded-full text-dust transition-colors hover:bg-white/5 hover:text-cream"
+            >
+              <LogOut className="size-4" />
+            </button>
+          )}
         </div>
       </header>
 
@@ -266,7 +312,13 @@ export default function Admin() {
         </Card>
 
         <p className="pb-16 text-center font-mono text-[11px] text-dust">
-          Saved changes show up on the site right away. Run <code className="text-sand">npm run build</code> to publish them.
+          {usesGitHub ? (
+            'Each save is a commit on GitHub. The site redeploys and shows it in a minute or two.'
+          ) : (
+            <>
+              Saved changes show up on the site right away. Run <code className="text-sand">npm run build</code> to publish them.
+            </>
+          )}
         </p>
       </div>
     </Shell>
@@ -290,16 +342,16 @@ function Card({ title, description, children }: { title: string; description?: s
 function SaveState({ status, dirty, error }: { status: Status; dirty: boolean; error: string }) {
   if (status === 'error') {
     return (
-      <span className="hidden items-center gap-1.5 text-xs text-red-300 md:inline-flex" title={error}>
-        <TriangleAlert className="size-3.5" /> Not saved
+      <span className="inline-flex max-w-[40vw] items-center gap-1.5 text-xs text-red-300" title={error}>
+        <TriangleAlert className="size-3.5 shrink-0" /> <span className="truncate">{error || 'Not saved'}</span>
       </span>
     )
   }
-  if (dirty) return <span className="hidden text-xs text-amber md:inline">Unsaved changes</span>
+  if (dirty) return <span className="shrink-0 text-xs text-amber">Unsaved</span>
   if (status === 'saved') {
     return (
-      <span className="hidden items-center gap-1.5 text-xs text-emerald-300 md:inline-flex">
-        <Check className="size-3.5" /> Saved
+      <span className="inline-flex shrink-0 items-center gap-1.5 text-xs text-emerald-300">
+        <Check className="size-3.5" /> {usesGitHub ? 'Saved · live in ~2 min' : 'Saved'}
       </span>
     )
   }

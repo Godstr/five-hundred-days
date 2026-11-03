@@ -1,8 +1,8 @@
 import { ImagePlus, LoaderCircle, Music, Trash2, Upload } from 'lucide-react'
 import { useRef, useState, type DragEvent, type ReactNode } from 'react'
 import type { L } from '../i18n'
-import { asset, cn } from '../lib/dom'
-import { shrinkPhoto, upload, type UploadKind } from './api'
+import { cn } from '../lib/dom'
+import { preview, shrinkPhoto, upload, type UploadKind } from './api'
 
 export const inputClass =
   'w-full rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-cream outline-none transition-colors placeholder:text-dust/60 focus:border-rose/60 focus:bg-white/[0.06]'
@@ -117,7 +117,7 @@ export function MediaField({
       >
         {photo ? (
           <div className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-lg bg-white/5">
-            {value ? <img src={asset(value)} alt="" className="size-full object-cover" /> : <ImagePlus className="size-5 text-dust" />}
+            {value ? <img src={preview(value)} alt="" className="size-full object-cover" /> : <ImagePlus className="size-5 text-dust" />}
           </div>
         ) : (
           !value && (
@@ -128,7 +128,7 @@ export function MediaField({
         )}
 
         <div className="min-w-0 flex-1">
-          {!photo && value && <audio controls src={asset(value)} className="h-9 w-full" />}
+          {!photo && value && <audio controls src={preview(value)} className="h-9 w-full" />}
           <p className="mt-1 truncate font-mono text-[11px] text-dust">
             {value ?? (photo ? 'Drop a photo here, or upload one' : 'Drop an mp3 / m4a here, or upload one')}
           </p>

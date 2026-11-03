@@ -1,6 +1,11 @@
 import type { StoryConfig } from '../config/story'
+import { asset } from '../lib/dom'
+import * as github from './github'
 
 export type UploadKind = 'memories' | 'audio'
+
+/** Under `npm run dev` the admin writes files on this computer; on the published site it commits to GitHub. */
+export const usesGitHub = !import.meta.env.DEV
 
 async function check(response: Response) {
   if (response.ok) return response
@@ -9,10 +14,12 @@ async function check(response: Response) {
 }
 
 export async function loadStory(): Promise<StoryConfig> {
+  if (usesGitHub) return github.loadStory()
   return (await check(await fetch('/__admin/story', { cache: 'no-store' }))).json()
 }
 
 export async function saveStory(story: StoryConfig): Promise<void> {
+  if (usesGitHub) return github.saveStory(story)
   await check(
     await fetch('/__admin/story', {
       method: 'PUT',
@@ -22,12 +29,23 @@ export async function saveStory(story: StoryConfig): Promise<void> {
   )
 }
 
+/* A file committed to GitHub only appears on the site after the next deploy,
+   so this session shows the copy still in memory. */
+const previews = new Map<string, string>()
+export const preview = (path: string | undefined) => (path && previews.get(path)) || asset(path)
+
 /** Uploads a file into public/<kind>/ and returns the path to store in the story, e.g. "memories/trip-lx3k9.jpg". */
 export async function upload(kind: UploadKind, name: string, file: Blob): Promise<string> {
-  const response = await check(
-    await fetch(`/__admin/upload?kind=${kind}&name=${encodeURIComponent(name)}`, { method: 'POST', body: file }),
-  )
-  return (await response.json()).path
+  let path: string
+  if (usesGitHub) path = await github.upload(kind, name, file)
+  else {
+    const response = await check(
+      await fetch(`/__admin/upload?kind=${kind}&name=${encodeURIComponent(name)}`, { method: 'POST', body: file }),
+    )
+    path = (await response.json()).path
+  }
+  previews.set(path, URL.createObjectURL(file))
+  return path
 }
 
 /** Phone photos are 4000px and several MB; the polaroid never needs more than this. */

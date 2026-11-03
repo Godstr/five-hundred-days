@@ -15,15 +15,24 @@ npm run build          # static site in dist/
 
 ## Admin: edit it without code
 
-Run `npm run dev` and open **http://localhost:5173/#admin**.
+Open **`/#admin`** on the live site (or **http://localhost:5173/#admin** under `npm run dev`).
 
 - **Memories:** add, delete, reorder; give each one a photo and a song or voice note (drag & drop works). Photos are shrunk to 1600px automatically.
 - **Side A:** the record's song and an optional voice note.
 - **Also editable:** names, start date, the letter, the vault code and the liner notes, in EN and МН side by side.
-- **Saving:** press **Save** (or Ctrl + S). The site in another tab refreshes by itself.
-- **Publishing:** run `npm run build` and deploy.
+- **Saving:** press **Save** (or Ctrl + S).
 
-The admin only exists in the dev server and only accepts requests from your own computer. It is never part of the built site, so she can't open it. Content is saved to `src/content/story.json`; uploads go to `public/memories/` and `public/audio/`.
+**On the live site** the admin saves to GitHub: every save and upload is a commit, and Vercel redeploys the site a minute or two later. It asks for a GitHub token first:
+
+1. Go to [github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new).
+2. Repository access: **Only select repositories → five-hundred-days**.
+3. Permissions: **Contents → Read and write**. Generate, copy, paste it into the admin.
+
+Without the token the page shows only the sign-in box, and visitors never download the admin code. The token is remembered in that browser; use the sign-out button on shared devices. The repo is set in `src/admin/github.ts`.
+
+**Under `npm run dev`** the admin writes straight into the project instead, needs no token, and the site in another tab refreshes by itself. Commit and push to publish.
+
+Content lives in `src/content/story.json`; uploads go to `public/memories/` and `public/audio/`.
 
 ## Make it yours: editing by hand
 
@@ -53,14 +62,15 @@ The **EN / МН** switch sits in the top bar and on the intro screen. The choice
 
 ## Deploy
 
-Every push to `main` builds the site and publishes it to **https://godstr.github.io/five-hundred-days/** (`.github/workflows/deploy.yml`). One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
+Hosted on **Vercel**, connected to the GitHub repo: every push to `main` (including saves from the admin) redeploys the site. Vercel detects Vite by itself: build `npm run build`, output `dist`.
 
-Elsewhere: `npm run build` and upload `dist/` to any static host. Asset paths are relative, so sub-folders work. If the address changes, update `og:image` in `index.html` (it must be an absolute URL for link previews).
+Any other static host works too: `npm run build` and upload `dist/`. Asset paths are relative, so sub-folders work.
+After deploying, change `og:image` in `index.html` to the absolute URL of `og.png` for nice link previews.
 
 On her iPhone: Safari → Share → **Add to Home Screen** opens it full-screen like an app.
 
 ## Notes
 
 - The page asks search engines not to index it, but anyone with the link can open it.
-- The vault is a cute lock, not real security: the letter is in the page's code.
+- The vault is a cute lock, not real security: the letter is in the page's code and in the public repo.
 - `npm run icons` regenerates the app icons and preview image (`scripts/generate-icons.mjs`).

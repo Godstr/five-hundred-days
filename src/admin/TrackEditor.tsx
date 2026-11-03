@@ -4,7 +4,8 @@ import type { ReactNode } from 'react'
 import { MOOD_COLORS } from '../components/tracklist/moodColors'
 import type { Mood, Track } from '../config/story'
 import { tx } from '../i18n'
-import { asset, cn } from '../lib/dom'
+import { cn } from '../lib/dom'
+import { preview } from './api'
 import { BiField, inputClass, Label, MediaField } from './fields'
 
 /* Local date math: importing lib/time would pull the story file into this page,
@@ -60,7 +61,7 @@ export function TrackEditor({ track, index, count, startDate, open, onToggle, on
             className="size-11 shrink-0 overflow-hidden rounded-lg"
             style={{ background: `linear-gradient(135deg, ${mid}, ${light})` }}
           >
-            {track.photo && <img src={asset(track.photo)} alt="" className="size-full object-cover" />}
+            {track.photo && <img src={preview(track.photo)} alt="" className="size-full object-cover" />}
           </span>
           <span className="min-w-0">
             <span className="block truncate font-medium text-cream">{tx(track.title, 'en') || 'Untitled memory'}</span>
