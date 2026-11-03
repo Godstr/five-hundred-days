@@ -1,0 +1,354 @@
+{
+  "her": {
+    "name": {
+      "en": "Bayarjargal",
+      "mn": "Баяржаргал"
+    },
+    "nameTo": {
+      "en": "Bayarjargal",
+      "mn": "Хайрдаа"
+    }
+  },
+  "me": {
+    "name": {
+      "en": "Gonchigsum",
+      "mn": "Гончигсум"
+    }
+  },
+  "startDate": "2025-06-24T00:00",
+  "album": {
+    "title": {
+      "en": "Five Hundred Days",
+      "mn": "Таван зуун өдөр"
+    },
+    "edition": {
+      "en": "Deluxe Edition",
+      "mn": "Тусгай хувилбар"
+    },
+    "artist": {
+      "en": "You & Me",
+      "mn": "Чи бид хоёр"
+    }
+  },
+  "music": {
+    "title": "Guys — Чи миний",
+    "src": "audio/chi-minii-duug-tavih.mp3"
+  },
+  "voiceNote": {
+    "title": {
+      "en": "A voice note from me",
+      "mn": "Надаас ирсэн дуут зурвас"
+    },
+    "src": ""
+  },
+  "tracks": [
+    {
+      "id": "first-hello",
+      "title": {
+        "en": "The First Hello",
+        "mn": "Анхны мэндчилгээ"
+      },
+      "tag": {
+        "en": "Intro",
+        "mn": "Оршил"
+      },
+      "date": "2025-06-24",
+      "place": {
+        "en": "Where it all began",
+        "mn": "Бүх зүйл эхэлсэн газар"
+      },
+      "note": {
+        "en": "I may not have been able to ask you in the most beautiful way, but I am always so happy that you said yes and became mine!!!",
+        "mn": " Чамайгаа гоёоор гуйж чадаагүй ч наддаа зөвшөөрч миний хайр болсонд үргэлж баярладаг шүү!!!"
+      },
+      "caption": {
+        "en": "day zero ♡",
+        "mn": "тэг дэх өдөр ♡"
+      },
+      "ps": {
+        "en": "I may not have been able to ask you in the most beautiful way, but I am always so happy that you said yes and became mine!!!",
+        "mn": " Чамайгаа гоёоор гуйж чадаагүй ч наддаа зөвшөөрч миний хайр болсонд үргэлж баярладаг шүү!!!"
+      },
+      "mood": "dawn",
+      "photo": "memories/img-e5227-mw0jbn0x.jpg",
+      "audio": "audio/the-lemons-suuliin-uyanga-mw0lhxr9.mp3"
+    },
+    {
+      "id": "midnight-melodies",
+      "title": {
+        "en": "Midnight Melodies",
+        "mn": "Шөнө дундын аялгуу"
+      },
+      "date": "2025-10-17",
+      "place": {
+        "en": "On the phone, 2:47 a.m.",
+        "mn": "Утсаар, шөнийн 2:47"
+      },
+      "note": {
+        "en": "Even when we lived apart, no matter how long it had been since we last met, I would always miss you—deeply. But when we talked at night until we fell asleep, the longing would ease a little.",
+        "mn": "Тусдаа байдаг байхад хэдий удаан уулзсанч гэсэн чамайгаа оруулаад л санадаг байж билээ. Тэгээд шөнө унтатлаа яриж арай бага санадаг байсансан"
+      },
+      "caption": {
+        "en": "I love you, have a good rest.",
+        "mn": "Хайртай шүү сайхан амраарай"
+      },
+      "mood": "night",
+      "photo": "memories/mvbo5051-mw0kyz02.jpg",
+      "audio": "audio/290-be-my-summer-ft-chill-with-yavuuhula-mw0lwhj2.mp3"
+    },
+    {
+      "id": "front-row",
+      "title": {
+        "en": "Front Row",
+        "mn": "Эхний эгнээ"
+      },
+      "date": "2025-05-25",
+      "place": {
+        "en": "A performance watched together",
+        "mn": "Хамтдаа үзсэн тоглолт"
+      },
+      "note": {
+        "en": "I am the luckiest one, to fall in love like this every single day.",
+        "mn": "Би л өдөр бүр ингэж дурлах хамгийн азтай нь"
+      },
+      "caption": "",
+      "mood": "stage",
+      "photo": "memories/c4b0a5a5-f304-4eea-be6a-610546b2e36d-mw0k1gij.jpeg",
+      "audio": "audio/gangbay-dandaa-hairtai-official-lyrics-v-mw0k1n1s.mp3"
+    },
+    {
+      "id": "memory-mw0ljciz",
+      "title": {
+        "en": "Our New Year",
+        "mn": "Бидний шинэ жил"
+      },
+      "date": "2025-12-31",
+      "place": {
+        "en": "",
+        "mn": ""
+      },
+      "note": {
+        "en": "",
+        "mn": ""
+      },
+      "caption": {
+        "en": "",
+        "mn": ""
+      },
+      "mood": "encore",
+      "photo": "memories/img-2014-mw0ll62l.jpg",
+      "audio": "audio/bayartsetseg-zul-sariin-beleg-mw0lpd4n.mp3"
+    },
+    {
+      "id": "mandal-trip",
+      "title": {
+        "en": "Unegt Trip",
+        "mn": "Үнэгт руу аялсан нь"
+      },
+      "date": "2026-05-05",
+      "place": {
+        "en": "Unegt",
+        "mn": "Үнэгт"
+      },
+      "note": {
+        "en": "A journey taken with you—a journey where, rather than looking at the road or the scenery, I kept my eyes fixed on you the whole way.",
+        "mn": "Зам , байгаль биш чам руу харсаар байгаад ирсэн чамтайгаа явсан аялал минь"
+      },
+      "caption": {
+        "en": "road trip, no map",
+        "mn": "газрын зураггүй аялал"
+      },
+      "mood": "road",
+      "audio": "audio/the-lemons-suuliin-uyanga-mw0jog3k.mp3",
+      "photo": "memories/img-3500-mw0jpeps.jpg"
+    },
+    {
+      "id": "first-snow",
+      "title": {
+        "en": "Children's Day Mountain Hike",
+        "mn": "Хүүхдийн баярийн ууланд гаралт"
+      },
+      "date": "2026-06-01",
+      "place": {
+        "en": "Bogd mountain",
+        "mn": "Богд уул"
+      },
+      "note": {
+        "en": "It was really wonderful to go hiking in the mountains with my loved one.",
+        "mn": "Хайрттайгаа ууланд гарах үнэхээр гоё байсан"
+      },
+      "caption": "",
+      "mood": "golden",
+      "photo": "memories/img-3891-mw0kazps.jpg",
+      "audio": "audio/naagii-saran-mw0kmgxp.mp3"
+    },
+    {
+      "id": "day-500",
+      "title": {
+        "en": "Day 500",
+        "mn": "500 дахь өдөр"
+      },
+      "tag": {
+        "en": "Bonus track",
+        "mn": "Нэмэлт дуу"
+      },
+      "date": "2026-11-06",
+      "place": {
+        "en": "Right here, right now",
+        "mn": "Яг энд, яг одоо"
+      },
+      "note": {
+        "en": "Even though five hundred days have passed, I am still in love with you. This is not the end of the album.",
+        "mn": "Таван зуун өдөр өнгөрсөн ч чамдаа одоо ч дурласаар. Энэ бол цомгийн төгсгөл биш."
+      },
+      "caption": {
+        "en": "to be continued…",
+        "mn": "үргэлжлэл бий…"
+      },
+      "ps": {
+        "en": "Turn the page. There’s a hidden track.",
+        "mn": "Хуудсаа эргүүл. Нууц дуу байгаа."
+      },
+      "mood": "encore",
+      "photo": "memories/img-4962-mw0l04e7.jpg",
+      "audio": "audio/opozit-hamgiin-saihan-n-ost-lyric-video-mw0l20ch.mp3"
+    }
+  ],
+  "linerNotes": {
+    "en": "I love you",
+    "mn": "Хайртай шүү хайраа"
+  },
+  "credits": [
+    {
+      "role": {
+        "en": "Lead vocals",
+        "mn": "Гоцлол дуучин"
+      },
+      "name": {
+        "en": "Bayarjargal",
+        "mn": "Баяржаргал"
+      }
+    },
+    {
+      "role": {
+        "en": "Production & code",
+        "mn": "Продюсер, код"
+      },
+      "name": {
+        "en": "Gonchigsum",
+        "mn": "Гончигсум"
+      }
+    },
+    {
+      "role": {
+        "en": "Recorded at",
+        "mn": "Бичсэн газар"
+      },
+      "name": {
+        "en": "Road trips, rooftops & late-night calls",
+        "mn": "Аялал, дээвэр, шөнийн дуудлагууд"
+      }
+    },
+    {
+      "role": {
+        "en": "Mixing",
+        "mn": "Миксинг"
+      },
+      "name": {
+        "en": "Coffee, rain, 3 a.m. voice notes",
+        "mn": "Кофе, бороо, шөнийн 3 цагийн дуут зурвас"
+      }
+    },
+    {
+      "role": {
+        "en": "Instrumentals",
+        "mn": "Хөгжим"
+      },
+      "name": {
+        "en": "Composed live in your browser (I can’t sing, so I wrote code)",
+        "mn": "Хөтөч дотор чинь шууд зохиогдсон (би дуулж чаддаггүй болохоор код бичсэн)"
+      }
+    },
+    {
+      "role": {
+        "en": "Indexing",
+        "mn": "Индекс"
+      },
+      "name": {
+        "en": "Zero-based, obviously. Track 01 is Day 0",
+        "mn": "Тэгээс эхэлнэ, мэдээж. 01-р дуу бол 0 дахь өдөр"
+      }
+    },
+    {
+      "role": {
+        "en": "Bugs fixed",
+        "mn": "Зассан алдаа"
+      },
+      "name": {
+        "en": "All of mine, by you",
+        "mn": "Миний бүх алдааг чи зассан"
+      }
+    }
+  ],
+  "vault": {
+    "code": "062425",
+    "hint": {
+      "en": "Our special date · MM DD YY",
+      "mn": "Бидний онцгой өдөр · сар өдөр он"
+    },
+    "rescueHint": {
+      "en": "Psst… it’s the date of Track 01, month first.",
+      "mn": "Пс… 01-р дууны огноо, сарыг нь эхэлж бич."
+    }
+  },
+  "letter": {
+    "greeting": {
+      "en": "My dear Bayarjargal,",
+      "mn": "Хайрдаа"
+    },
+    "body": {
+      "en": [
+        "I made this little page just for you. Every moment we’ve spent together, every memory we share, stays with me always."
+      ],
+      "mn": [
+        "Энэхүү бяцхан хуудсыг чамдаа зориулан бүтээв. Бидний хамтдаа өнгөрүүлсэн хором мөч бүр, дурсамж бүхэн надтай үргэлж хамт байдаг шүү."
+      ]
+    },
+    "closing": {
+      "en": "With love,",
+      "mn": "Хайрт"
+    },
+    "signature": {
+      "en": "your Gonchigsum",
+      "mn": "Гончигсум нь."
+    }
+  },
+  "secret": {
+    "note": {
+      "en": [
+        "Hey you. Yes, you, snooping around in the inspector. 👀",
+        "Of course you found this. You’re dating a developer.",
+        "",
+        "Fun fact: this whole site has 0 bugs and exactly 1 feature: you.",
+        "I can’t sing like you, so I wrote you something in my language instead.",
+        "",
+        "500 days in, and you’re still my favorite notification.",
+        "I love you. More than tabs vs. spaces. More than dark mode."
+      ],
+      "mn": [
+        "Хөөе, чи. Тийм ээ, инспектор дотор шагайж байгаа чи. 👀",
+        "Мэдээж чи олно гэдгийг мэдэж байсан. Програмист залуутай болзож байгаа юм чинь.",
+        "",
+        "Сонирхолтой баримт: энэ сайтад 0 алдаа, яг ганцхан онцлог бий: чи.",
+        "Би чам шиг дуулж чаддаггүй болохоор өөрийнхөө хэлээр чамд нэг юм бичлээ.",
+        "",
+        "500 өдөр өнгөрсөн ч чи миний хамгийн дуртай мэдэгдэл хэвээрээ.",
+        "Би чамд хайртай. Tab vs. space-ээс ч илүү. Dark mode-оос ч илүү."
+      ]
+    },
+    "signature": {
+      "en": "Gonchigsum",
+      "mn": "Гончигсум"
+    }
+  }
+}

@@ -1,0 +1,305 @@
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────────────────────
+   Design tokens — warm espresso darkness, cream type, amber + rose
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Cormorant Garamond Variable', 'Cormorant Garamond', ui-serif, Georgia, serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-hand: 'Caveat Variable', 'Bradley Hand', 'Segoe Print', cursive;
+
+  --color-ink: #0e0c0b;
+  --color-coal: #171412;
+  --color-smoke: #221e1b;
+  --color-cream: #f3eadb;
+  --color-sand: #bcb0a0;
+  --color-dust: #8a7f72;
+  --color-amber: #f2a457;
+  --color-rose: #ff6f91;
+  --color-blush: #ffc4d1;
+  --color-wine: #6e1d3a;
+  --color-lilac: #b9a2ff;
+  --color-paper: #f7f0e4;
+  --color-sepia: #3d2c24;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  --animate-blink: blink 1s steps(1) infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.94); opacity: 0.65; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.25); }
+  50% { transform: scaleY(1); }
+}
+@keyframes grain {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-4%, 3%, 0); }
+  40% { transform: translate3d(3%, -5%, 0); }
+  60% { transform: translate3d(-2%, -2%, 0); }
+  80% { transform: translate3d(4%, 4%, 0); }
+}
+@keyframes drift-1 { to { transform: translate3d(14vw, 12vh, 0) scale(1.12); } }
+@keyframes drift-2 { to { transform: translate3d(-12vw, -10vh, 0) scale(0.92); } }
+@keyframes drift-3 { to { transform: translate3d(8vw, -14vh, 0) scale(1.18); } }
+
+/* ─────────────────────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--color-ink);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scrollbar-color: #3a3330 transparent;
+    scrollbar-width: thin;
+  }
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: rgb(255 111 145 / 0.35);
+    color: #fff;
+  }
+  button,
+  a,
+  [role='button'] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+  }
+  img {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+  /* Cormorant defaults to old-style figures; counters need lining ones */
+  .font-display {
+    font-feature-settings: 'lnum' 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .orb,
+  .grain,
+  .eq > i {
+    animation: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Utilities
+   ───────────────────────────────────────────────────────────── */
+@utility glass {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.03));
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    0 24px 60px -24px rgb(0 0 0 / 0.7);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+}
+
+@utility glass-strong {
+  background: linear-gradient(180deg, rgb(34 29 27 / 0.82), rgb(20 17 16 / 0.9));
+  border: 1px solid rgb(255 255 255 / 0.09);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 30px 80px -20px rgb(0 0 0 / 0.85);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(160%);
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-sand);
+}
+
+@utility text-love {
+  background-image: linear-gradient(100deg, #fff3e8 0%, #ffc4d1 38%, #ff8fa8 68%, #f2a457 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-shine {
+  background-image: linear-gradient(110deg, var(--color-cream) 38%, #ffffff 50%, var(--color-cream) 62%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+@utility pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+@utility mask-fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Components
+   ───────────────────────────────────────────────────────────── */
+@layer components {
+  /* Ambient backdrop */
+  .orb {
+    position: absolute;
+    border-radius: 9999px;
+    will-change: transform;
+  }
+  .orb-1 {
+    width: 85vmax;
+    height: 85vmax;
+    left: -32vmax;
+    top: -38vmax;
+    background: radial-gradient(closest-side, rgb(255 111 145 / 0.17), rgb(255 111 145 / 0.05) 55%, transparent);
+    animation: drift-1 28s ease-in-out infinite alternate;
+  }
+  .orb-2 {
+    width: 75vmax;
+    height: 75vmax;
+    right: -34vmax;
+    top: 18vh;
+    background: radial-gradient(closest-side, rgb(242 164 87 / 0.13), rgb(242 164 87 / 0.04) 55%, transparent);
+    animation: drift-2 34s ease-in-out infinite alternate;
+  }
+  .orb-3 {
+    width: 65vmax;
+    height: 65vmax;
+    left: 4vw;
+    bottom: -40vmax;
+    background: radial-gradient(closest-side, rgb(185 162 255 / 0.1), transparent);
+    animation: drift-3 40s ease-in-out infinite alternate;
+  }
+  .grain {
+    position: absolute;
+    inset: -50%;
+    opacity: 0.075;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    animation: grain 8s steps(8) infinite;
+  }
+  .noise {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 120% 90% at 50% 35%, transparent 55%, rgb(0 0 0 / 0.55) 100%);
+  }
+
+  /* Vinyl record */
+  .vinyl-disc {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle closest-side, transparent 96.6%, rgb(255 255 255 / 0.08) 97.4%, rgb(0 0 0 / 0.6) 98.8%, transparent 100%),
+      repeating-radial-gradient(circle at 50% 50%, #141215 0, #141215 1.1px, #211d23 1.7px, #121013 2.6px),
+      #121013;
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.05),
+      inset 0 0 50px rgb(0 0 0 / 0.6);
+  }
+  .vinyl-sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    pointer-events: none;
+    background:
+      conic-gradient(
+        from 200deg,
+        transparent 0deg,
+        rgb(255 255 255 / 0.14) 22deg,
+        transparent 52deg,
+        transparent 180deg,
+        rgb(255 196 209 / 0.12) 202deg,
+        transparent 232deg
+      ),
+      radial-gradient(circle at 28% 22%, rgb(255 255 255 / 0.08), transparent 42%);
+    -webkit-mask-image: radial-gradient(circle closest-side, transparent 33%, #000 34%, #000 98.4%, transparent 99.4%);
+    mask-image: radial-gradient(circle closest-side, transparent 33%, #000 34%, #000 98.4%, transparent 99.4%);
+    mix-blend-mode: screen;
+  }
+
+  /* Tiny equalizer */
+  .eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+  }
+  .eq > i {
+    display: block;
+    width: 3px;
+    height: 100%;
+    border-radius: 2px;
+    background: currentColor;
+    transform-origin: bottom;
+    transform: scaleY(0.3);
+    animation: eq 0.95s ease-in-out infinite;
+  }
+  .eq > i:nth-child(2) { animation-duration: 0.78s; animation-delay: -0.3s; }
+  .eq > i:nth-child(3) { animation-duration: 1.1s; animation-delay: -0.55s; }
+  .eq > i:nth-child(4) { animation-duration: 0.86s; animation-delay: -0.12s; }
+  .eq[data-paused='true'] > i { animation-play-state: paused; }
+
+  /* Paper for the polaroid back & the letter */
+  .paper {
+    background-color: var(--color-paper);
+    background-image:
+      radial-gradient(circle at 90% 7%, transparent 0 34px, rgb(140 92 55 / 0.13) 36px, rgb(140 92 55 / 0.05) 41px, transparent 44px),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.25  0 0 0 0 0.18  0 0 0 0.09 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>"),
+      linear-gradient(180deg, rgb(255 255 255 / 0.55), transparent 35%);
+  }
+}

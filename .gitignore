@@ -1,0 +1,9 @@
+node_modules
+dist
+*.local
+.DS_Store
+*.tsbuildinfo
+
+# Local tooling and stray downloads
+.claude/
+*lyrics.jpg

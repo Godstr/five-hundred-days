@@ -63,4 +63,3 @@ On her iPhone: Safari → Share → **Add to Home Screen** opens it full-screen 
 - The page asks search engines not to index it, but anyone with the link can open it.
 - The vault is a cute lock, not real security: the letter is in the page's code.
 - `npm run icons` regenerates the app icons and preview image (`scripts/generate-icons.mjs`).
-# five-hundred-days
